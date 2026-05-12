@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forge World Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="forge-container">
+        <!-- Main editor interface -->
+        <div class="editor-layout">
+            <!-- Left Panel: Hierarchy & Layers -->
+            <div class="panel left-panel">
+                <div class="panel-header">
+                    <h3>Hierarchy</h3>
+                    <div class="panel-controls">
+                        <button id="btn-new-layer" class="icon-btn" title="New Layer">+</button>
+                        <button id="btn-expand-all" class="icon-btn" title="Expand All">⊕</button>
+                    </div>
+                </div>
+                <div class="hierarchy-content" id="hierarchy-tree">
+                    <!-- Dynamic hierarchy content -->
+                </div>
+            </div>
+
+            <!-- Center: 3D View -->
+            <div class="viewport-area" id="viewport">
+                <canvas id="game-canvas"></canvas>
+                <div class="viewport-overlay">
+                    <!-- Grid indicator -->
+                    <div class="snap-indicator" id="snap-indicator">
+                        <span id="snap-status">Grid: ON | Angle: OFF</span>
+                    </div>
+                    
+                    <!-- FPS Counter -->
+                    <div class="performance-monitor" id="perf-monitor">
+                        <span id="fps-counter">FPS: 0</span>
+                        <span id="resmon-counter">ResMan: 0.00</span>
+                        <span id="object-counter">Objects: 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Inspector & Properties -->
+            <div class="panel right-panel">
+                <div class="panel-tabs">
+                    <button class="tab-btn active" data-tab="inspector">Inspector</button>
+                    <button class="tab-btn" data-tab="assets">Assets</button>
+                    <button class="tab-btn" data-tab="history">History</button>
+                </div>
+
+                <!-- Inspector Tab -->
+                <div class="tab-content active" id="tab-inspector">
+                    <div class="inspector-section">
+                        <h4>Object Properties</h4>
+                        <div id="object-properties">
+                            <div class="property-group">
+                                <label>Position</label>
+                                <div class="vector3-input">
+                                    <input type="number" id="prop-x" placeholder="X" step="0.01">
+                                    <input type="number" id="prop-y" placeholder="Y" step="0.01">
+                                    <input type="number" id="prop-z" placeholder="Z" step="0.01">
+                                </div>
+                            </div>
+                            <div class="property-group">
+                                <label>Rotation (Degrees)</label>
+                                <div class="vector3-input">
+                                    <input type="number" id="prop-rx" placeholder="X" step="1" min="0" max="360">
+                                    <input type="number" id="prop-ry" placeholder="Y" step="1" min="0" max="360">
+                                    <input type="number" id="prop-rz" placeholder="Z" step="1" min="0" max="360">
+                                </div>
+                            </div>
+                            <div class="property-group">
+                                <label>Scale</label>
+                                <div class="vector3-input">
+                                    <input type="number" id="prop-sx" placeholder="X" step="0.1" min="0.1" max="100">
+                                    <input type="number" id="prop-sy" placeholder="Y" step="0.1" min="0.1" max="100">
+                                    <input type="number" id="prop-sz" placeholder="Z" step="0.1" min="0.1" max="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assets Tab -->
+                <div class="tab-content" id="tab-assets">
+                    <div class="asset-browser">
+                        <div class="search-box">
+                            <input type="text" id="asset-search" placeholder="Search props...">
+                        </div>
+                        <div class="asset-grid" id="asset-grid">
+                            <!-- Dynamic asset list -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Tab -->
+                <div class="tab-content" id="tab-history">
+                    <div class="history-list" id="history-list">
+                        <!-- Dynamic history entries -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Toolbar -->
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button id="btn-save" class="tool-btn" title="Save Map (Ctrl+S)">💾 Save</button>
+                <button id="btn-load" class="tool-btn" title="Load Map">📂 Load</button>
+                <button id="btn-export" class="tool-btn" title="Export as Resource">📤 Export</button>
+            </div>
+
+            <div class="toolbar-group">
+                <button id="btn-undo" class="tool-btn" title="Undo (Ctrl+Z)">↶ Undo</button>
+                <button id="btn-redo" class="tool-btn" title="Redo (Ctrl+Y)">↷ Redo</button>
+            </div>
+
+            <div class="toolbar-group">
+                <button id="btn-move" class="tool-btn" title="Move Tool (M)">✥ Move</button>
+                <button id="btn-rotate" class="tool-btn" title="Rotate Tool (R)">⟲ Rotate</button>
+                <button id="btn-scale" class="tool-btn" title="Scale Tool (S)">↔ Scale</button>
+            </div>
+
+            <div class="toolbar-group">
+                <button id="btn-snap-grid" class="tool-btn toggle" title="Toggle Grid Snap (G)">◧ Grid</button>
+                <button id="btn-snap-angle" class="tool-btn toggle" title="Toggle Angle Snap (A)">∠ Angle</button>
+                <button id="btn-local-space" class="tool-btn toggle" title="Local/World Space">🔷 Local</button>
+            </div>
+
+            <div class="toolbar-group">
+                <button id="btn-delete" class="tool-btn danger" title="Delete Selected (Del)">🗑 Delete</button>
+                <button id="btn-duplicate" class="tool-btn" title="Duplicate (Ctrl+D)">📋 Duplicate</button>
+            </div>
+
+            <div class="toolbar-group">
+                <button id="btn-settings" class="tool-btn" title="Settings">⚙ Settings</button>
+                <button id="btn-help" class="tool-btn" title="Help">? Help</button>
+            </div>
+        </div>
+
+        <!-- Bottom Status Bar -->
+        <div class="statusbar">
+            <div class="status-left">
+                <span id="status-message">Ready</span>
+            </div>
+            <div class="status-right">
+                <span id="coord-display">X: 0.00 Y: 0.00 Z: 0.00</span>
+            </div>
+        </div>
+
+        <!-- Collaboration Panel -->
+        <div class="collaboration-panel" id="collab-panel" style="display: none;">
+            <div class="collab-header">
+                <h4>Live Collaborators</h4>
+                <button class="close-btn">×</button>
+            </div>
+            <div class="collaborators-list" id="collaborators-list">
+                <!-- Dynamic collaborator list -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
