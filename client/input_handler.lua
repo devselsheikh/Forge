@@ -1,7 +1,7 @@
 --- FORGE: Client Input Handler
 --- Keyboard, mouse, and hotkey management
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 
@@ -15,6 +15,29 @@ local InputHandler = {
         middlePressed = false,
     },
 }
+
+local KEY_MAP = {
+    F5 = 166,
+    M = 244,
+    R = 45,
+    S = 33,
+    D = 249,
+    Z = 20,
+    Y = 246,
+    G = 47,
+    A = 34,
+    DELETE = 178,
+    CTRL = 36,
+}
+
+local function getControlCode(keyName)
+    if not keyName then return nil end
+    local normalized = keyName:upper()
+    if normalized:find('CTRL%+') then
+        normalized = normalized:gsub('CTRL%+', '')
+    end
+    return KEY_MAP[normalized]
+end
 
 --- Initialize default hotkeys
 function InputHandler.initHotkeys()
@@ -55,17 +78,21 @@ end
 ---@param keyName string
 ---@return boolean
 function InputHandler.isKeyPressed(keyName)
-    if keyName:find('CTRL') then
-        return IsControlPressed(0, GetHashKey(keyName))
+    local control = getControlCode(keyName)
+    if not control then return false end
+    if keyName:upper():find('CTRL%+') then
+        return IsControlPressed(0, KEY_MAP.CTRL) and IsControlPressed(0, control)
     end
-    return IsKeyPressed(GetHashKey(keyName))
+    return IsControlPressed(0, control)
 end
 
 --- Check if key is just released
 ---@param keyName string
 ---@return boolean
 function InputHandler.isKeyJustReleased(keyName)
-    return IsKeyJustReleased(GetHashKey(keyName))
+    local control = getControlCode(keyName)
+    if not control then return false end
+    return IsControlJustReleased(0, control)
 end
 
 --- Get mouse position (0-1 normalized)

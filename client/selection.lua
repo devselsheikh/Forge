@@ -1,7 +1,7 @@
 --- FORGE: Client Selection System
 --- Multiselect, drag select, radius select, group operations
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 

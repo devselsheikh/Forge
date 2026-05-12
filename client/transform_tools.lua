@@ -1,7 +1,7 @@
 --- FORGE: Client Transform Tools
 --- Move, rotate, scale with gizmo and snap modes
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 

@@ -1,7 +1,7 @@
 --- FORGE: Server Collaboration Module
 --- Multi-admin editing, live presence, object locking
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 

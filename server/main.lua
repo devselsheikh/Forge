@@ -1,7 +1,7 @@
 --- FORGE: Server Main
 --- Event handlers and main server logic
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 local Permissions = require 'server.permissions'
