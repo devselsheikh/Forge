@@ -1,7 +1,7 @@
 --- FORGE: Server Validation Module
 --- Zero-trust validation layer for all client requests
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 

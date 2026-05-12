@@ -18,6 +18,14 @@ class ForgeUI {
     }
 
     initialize() {
+        // Hard-hide UI on boot; it should only appear after explicit editor open state.
+        document.body.style.background = 'transparent';
+        const app = document.getElementById('app');
+        if (app) {
+            app.style.display = 'none';
+            app.style.pointerEvents = 'none';
+        }
+
         this.setupEventListeners();
         this.setupNuiListeners();
         this.updateUI();
@@ -201,10 +209,13 @@ class ForgeUI {
     // UI Updates
     onEditorStateChanged(data) {
         this.state.editorOpen = data.isOpen;
+        const app = document.getElementById('app');
         if (data.isOpen) {
-            document.getElementById('app').style.display = 'flex';
+            app.style.display = 'flex';
+            app.style.pointerEvents = 'auto';
         } else {
-            document.getElementById('app').style.display = 'none';
+            app.style.display = 'none';
+            app.style.pointerEvents = 'none';
         }
     }
 

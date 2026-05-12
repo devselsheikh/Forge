@@ -9,6 +9,7 @@ version '1.0.0'
 
 --- Shared initialization
 shared_scripts {
+    'shared/loader.lua',
     'shared/constants.lua',
     'shared/config.lua',
     'shared/utils.lua',

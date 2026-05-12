@@ -1,12 +1,12 @@
 /* FORGE: Professional Dark Theme UI */
 
 :root {
-    --primary: #00b4d8;
-    --primary-dark: #0096c7;
-    --secondary: #03045e;
-    --background: #0f0f1e;
-    --surface: #1a1a2e;
-    --surface-light: #16213e;
+    --primary: #4f8cff;
+    --primary-dark: #3d70d6;
+    --secondary: #0b1220;
+    --background: #06090f;
+    --surface: rgba(15, 23, 42, 0.88);
+    --surface-light: rgba(30, 41, 59, 0.9);
     --text-primary: #ffffff;
     --text-secondary: #b0b0b0;
     --border: #2a2a3e;
@@ -27,15 +27,15 @@ html, body {
     width: 100%;
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: var(--background);
-    color: var(--text-primary);
+    background: transparent;
+    color: transparent;
     overflow: hidden;
 }
 
 #app {
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 
@@ -51,6 +51,8 @@ html, body {
 .panel {
     background: var(--surface);
     border: 1px solid var(--border);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -180,6 +182,8 @@ html, body {
 
 /* Toolbar */
 .toolbar {
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
     display: flex;
     gap: 12px;
     padding: 12px;

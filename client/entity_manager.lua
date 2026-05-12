@@ -1,7 +1,7 @@
 --- FORGE: Client Entity Manager
 --- Manages local object representations, ghosting, and entity lifecycle
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 
