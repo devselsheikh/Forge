@@ -1,7 +1,7 @@
 --- FORGE: Client History System
 --- Unlimited undo/redo with state snapshots
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 
