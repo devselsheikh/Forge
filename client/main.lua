@@ -63,7 +63,7 @@ local function mainLoop()
             fpsCounter = 0
             lastFpsTime = now
             
-            local resmon = GetResourceMetrics(GetCurrentResourceName(), 0) / 1000.0
+            local resmon = 0.0
             local objectCount = EntityManager.getObjectCount()
             
             UI.updatePerformance(fps, resmon, objectCount)
