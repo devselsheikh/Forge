@@ -1,7 +1,7 @@
 --- FORGE: Client Editor State
 --- Manages editor modes, settings, and global state
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 

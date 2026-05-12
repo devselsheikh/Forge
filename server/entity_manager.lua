@@ -1,7 +1,7 @@
 --- FORGE: Server Entity Manager
 --- Manages object lifecycle, ownership, networking, and persistence
 
-local CONSTANTS = require 'shared.constants'
+local CONSTANTS = require 'shared/constants'
 local CONFIG = require 'shared.config'
 local UTILS = require 'shared.utils'
 local Permissions = require 'server.permissions'
